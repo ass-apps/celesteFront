@@ -82,7 +82,8 @@
                   <a data-toggle="modal" data-target=".contact-popup" class="tes" href="#">Contacto</a>
                 </li>
 
-                <li><a data-toggle="modal" data-target=".lang-popup" href="#"><img title='Traducir' src="{{ url('assets/img/language_icon.png') }}" class="ic-lang"></a></li>
+                <!--<li><a data-toggle="modal" data-target=".lang-popup" href="#"><img title='Traducir' src="{{ url('assets/img/language_icon.png') }}" class="ic-lang"></a></li>-->
+                <li><a data-toggle="modal" data-target=".lang-popup" href="#">Ing/Esp</a></li>
               </ul>
             </nav>
           </div>
