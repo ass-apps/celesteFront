@@ -43,6 +43,7 @@ body {
 .footer a,
 .footer p {
     color: #1d1d1dbd;
+    padding: 1rem;
 }
 .banner {
     height: 100vh !important;
@@ -119,6 +120,7 @@ h3 {
     font-family: "futura";
 }
 .about-fix {
+    padding-bottom: 3.5rem;
 }
 .about-fix h3 {
     text-transform: uppercase;
@@ -340,6 +342,7 @@ body {
     grid-auto-rows: auto;
     grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
     gap: 1.5rem;
+    margin-bottom: 10rem;
 }
 
 .projects .item img {
@@ -814,7 +817,7 @@ section.blog-details .blog-details-wrapper .blog-text h3 {
     color: #000;
 }
 section.blog-details .blog-details-wrapper .blog-text p {
-    padding: 30px 0px;
+    /*padding: 30px 0px;*/
 }
 section.blog-details .blog-details-wrapper .blog-text .gift-info {
     position: relative;
@@ -1460,22 +1463,41 @@ section.mextreo-hero.inner .contact-details .single-info h5 {
     height: 18px;
     margin-right: 0.5rem;
 }
+.slick-track:before, .slick-track:after{
+    display: none;
+}
 
 .slider-nav .slick-track {
-    display: flex;
-    flex-wrap: wrap;
+   /* display: flex;
+    flex-wrap: wrap;*/
+    display: grid;
+    grid-template-columns: 250px 250px 250px;
     transform: initial !important;
 }
 .slider-nav .slick-slide {
-    width: 25% !important;
-    margin: 7px;
+  /*  width: 25% !important;*/
+  width: 94% !important;
+  margin: 6px;
 }
-
+.hero-content {
+    margin-left: 7rem;
+}
+.hero-content-group {
+    margin-left: 20rem;
+}
+/*
 .slider-nav .slick-slide img {
     display: block;
     width: 100%;
     height: 160px;
     object-fit: cover;
+}*/
+.slider-nav .slick-slide img {
+    display: block;
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    object-position: revert;
 }
 .mt-10 {
     margin-top: 6rem;
@@ -1504,7 +1526,7 @@ section.mextreo-hero.inner .contact-details .single-info h5 {
 }
 
 .elipse {
-    background: #fff;
+    background: transparent;
     position: fixed;
     z-index: 9999999;
     height: 100%;
@@ -1561,6 +1583,10 @@ video {
     background: #fff;
     z-index: 99999;
     top: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
 }
 
 .pre-loader-container {
@@ -1594,9 +1620,8 @@ video {
 }
 
 .logo-loader .icon-loader {
-    width: 10%;
-    max-width: 600px;
-    height: -webkit-fill-available;
+    width: 100%;
+    height: 300px;
 }
 
 .text__loader {
@@ -1681,8 +1706,8 @@ video {
 }
 .dropdown-item {
     padding: 6px 20px !important;
-    text-transform: lowercase !important;
-    font-size: 1.1rem !important;
+    text-transform: capitalize!important;
+    font-size: .9rem !important;
 }
 .dropdown-item::first-letter {
     text-transform: uppercase;
@@ -1704,9 +1729,12 @@ header.mextreo-header-area.nav-fixed button {
     display: none;
 }
 .redes {
-    border-bottom: 1px solid #ffffff24;
+ /*   border-bottom: 1px solid #ffffff24;*/
     margin-bottom: 0.5rem;
     padding-bottom: 0.5rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
 }
 .redes a {
     padding: 0 0.5rem;
@@ -1724,6 +1752,7 @@ header.mextreo-header-area.nav-fixed button {
 }
 
 @media (max-width: 576px) {
+
     .dropdown:hover > .dropdown-menu {
 
         text-align: center;
@@ -1879,3 +1908,84 @@ header.mextreo-header-area.nav-fixed button {
 .filter-nav {
     filter: brightness(1);
 }
+
+.video-xs video{
+    display: none!important;
+
+}
+.video-xs video {
+
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+.img-ar{
+    height:75%;
+}
+@media (min-width: 0px) and (max-width: 767px) {
+    .video-xl{
+        display:none;
+    }
+    .video-xs video{
+        display: block!important;
+    }
+    .hero-content {
+    margin-left: 2rem;
+    }
+    html{
+        overflow-x: hidden;
+    }
+    .img-ar{
+        height: 100%;
+    }
+    .ws {
+
+        bottom: 8rem;
+        right: .9rem;
+    }
+    .ws img {
+    width: 40px;
+    }
+
+.logo-about{
+    margin-top: 2rem;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+}
+
+
+.ws{
+        position: fixed;
+    z-index: 99;
+    bottom: 2rem;
+    right: .9rem;
+}
+
+.ws img{
+    width: 50px;
+}
+#manidesto p{
+    margin-bottom: 0;
+}
+.mychar{
+    width: 25px;
+    height: 25px;
+}
+
+.mycar-w {
+    filter: invert(1);
+}
+.ic-lang{
+    padding: 0px;
+    width: 25px;
+    height: auto;
+  }
+  .ic-lang:hover{
+    opacity: 0.5;
+  }
+
+  #google_translate_element img{
+    display: initial;
+  }

@@ -66,6 +66,23 @@
       display: none;
     }
   </style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9S99WQ3T1H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9S99WQ3T1H');
+</script>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'es',includedLanguages : 'es,en'}, 'google_translate_element');
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     @stack('styles')
 </head>
@@ -74,7 +91,10 @@
 
     @yield("content")
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <a class="ws" target="_blank" href="https://api.whatsapp.com/send?phone=+573222239933"> <img src="{{ url('assets/img/whatsapp.svg') }}" alt=""> </a>
+
+
+
     <script src="{{ url('assets/js/jquery-3.4.1.min.js') }}"></script>
 
     <script src="{{ url('assets/js/bootstrap.min.js') }}"></script>
@@ -102,6 +122,19 @@
     <!-- REVOLUTION BANNER JS FILES  -->
     <script type="text/javascript" src="{{ url('assets/js/plugin.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/revslider.min.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9S99WQ3T1H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9S99WQ3T1H');
+</script>
+
+
 <script>
       setTimeout(function () {
             $('#pre-loader').fadeOut(300);
@@ -123,44 +156,47 @@
         <div class="modal-body">
           <div class="grid-contact">
             <div>
-              <form id="cf" method="POST">
+
                 <div class="form-group mcfg">
-                  <input type="text" class="form-control m-input" name="name" id="name" placeholder="Nombre*"
+                  <input type="text" class="form-control m-input" name="name" id="name-message" placeholder="Nombre*"
                     onfocus="this.placeholder = ''" onblur="this.placeholder ='Nombre*'">
                 </div>
                 <div class="form-group mcfg">
-                  <input type="text" class="form-control m-input" name="email" id="email" placeholder="Correo electronico  *"
+                  <input type="text" class="form-control m-input" name="email" id="email-message" placeholder="Correo electronico  *"
                     onfocus="this.placeholder = ''" onblur="this.placeholder ='Correo electronico *'">
                 </div>
                 <div class="form-group mcfg">
-                  <textarea rows="4" class="form-control m-input" name="msg" id="msg" placeholder="Mensaje *"
+                  <textarea rows="4" class="form-control m-input" name="msg" id="message-message" placeholder="Mensaje *"
                     onfocus="this.placeholder =''" onblur="this.placeholder ='Mensaje *'"></textarea>
                 </div>
-                <button type="submit" id="submit" class="m-submit btn-enviar">enviar</button>
+                <button type="button" id="buttonSendMessage" class="m-submit btn-enviar" onclick="sendMessage()">enviar</button>
+                <div id="spinner" style="display:none">
+                   Enviando...
+                </div>
                 <div class="col-md-12 text-center">
                   <div class="cf-msg"></div>
                 </div>
-              </form>
+
             </div>
 
             <div>
 
-              <div class="contact-details pl-5" data-aos="fade-up" data-aos-duration="3000">
+              <div class="contact-details pl-5" >
 
                 <div class="single-info">
                   <h5>Dirección:</h5>
                   <p>Cra. 4 # 13 –14 Piso 4 Ed. Davivienda</p>
-
+                  <p>Santa Marta</p>
                 </div>
                 <div class="single-info">
                   <h5>Teléfono:</h5>
-                  <p> (+57) 322 223 99 33 </p>
+                  <p> <a href="tel:(+57) 322 223 99 33" class="__cf_email__">(+57) 322 223 99 33</a> </p>
 
                 </div>
                 <div class="single-info">
                   <h5>Email:</h5>
-                  <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                     > info@celesteypiedra.com</a></p>
+                  <p><a href="mailto:contacto@celesteypiedra.com" class="__cf_email__"
+                     > contacto@celesteypiedra.com</a></p>
 
                 </div>
               </div>
@@ -172,6 +208,49 @@
       </div>
     </div>
   </div>
+
+  <script>
+        function sendMessage() {
+
+            let email = $("#email-message").val()
+            let name = $("#name-message").val()
+            let message = $("#message-message").val()
+
+            $("#buttonSendMessage").css("display", "none")
+            $("#spinner").css("display", "block")
+
+            $.post("{{ url('/send/message') }}", {
+            "email": email,
+            "name": name,
+            "text": message,
+            "_token": "{{ csrf_token() }}"
+            }, function(data) {
+
+            $("#buttonSendMessage").css("display", "block")
+            $("#spinner").css("display", "none")
+
+            $("#email-message").val("")
+            $("#name-message").val("")
+            $("#message-message").val("")
+
+            swal({
+                icon: "success",
+                text: "Mensaje enviado"
+            })
+
+            })
+
+        }
+    </script>
+
+    <script type="text/javascript">
+      (function(e,a){
+          var t,r=e.getElementsByTagName("head")[0],c=e.location.protocol;
+          t=e.createElement("script");t.type="text/javascript";
+          t.charset="utf-8";t.async=!0;t.defer=!0;
+          t.src=c+"//front.optimonk.com/public/"+a+"/js/preload.js";r.appendChild(t);
+      })(document,"156218");
+  </script>
 
 </body>
 

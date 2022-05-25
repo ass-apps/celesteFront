@@ -30,6 +30,9 @@
     color: black!important;
 
 }
+.ic-lang{
+    filter: brightness(0.4);
+}
   </style>
 
     @include("partials.navbar")

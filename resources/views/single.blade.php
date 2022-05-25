@@ -69,8 +69,15 @@
 
 
     }
-
   </style>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'es',includedLanguages : 'es,en'}, 'google_translate_element');
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </head>
 
 <body>
@@ -85,24 +92,28 @@
 
   @include("partials.navbar")
   @include("partials.loader")
+  <style>
+    .dropdown-menu {
+      background: #ffffff70 !important;
+    }
+  </style>
   <div class="main position-relative">
     <div class="slider slider-for">
 
 
-        <a data-fancybox="gallery" href="{{ $project->main_image }}">
-          <img src="{{ $project->main_image }}" alt="">
-          <div class="mask"></div>
-          <div class="icon-expand" data-aos="fade-up" data-aos-duration="2000">
-            <img class="" src="{{ url('assets/img/ecpand.svg') }}" alt="">
-
-          </div>
-        </a>
+      <a data-fancybox="gallery" href="{{ $project->main_image }}">
+        <img src="{{ $project->main_image }}" alt="">
+        <div class="mask"></div>
+        <div class="icon-expand">
+          <img class="" src="{{ url('assets/img/ecpand.svg') }}" alt="">
+        </div>
+      </a>
 
       @foreach(DB::table("secondary_images")->where("project_id", $project->id)->get() as $image)
       <a data-fancybox="gallery" href="{{ $image->image  }}">
         <img src="{{$image->image}}" alt="">
         <div class="mask"></div>
-        <div class="icon-expand" data-aos="fade-up" data-aos-duration="3000">
+        <div class="icon-expand">
           <img class="" src="{{ url('assets/img/ecpand.svg') }}" alt="">
 
         </div>
@@ -114,35 +125,45 @@
   </div>
 
   <section class="">
-    <div class="container">
+    <div class="m-">
       <div class="row">
-        <div class="col-md-5">
-          <div class="hero-content ">
-
-            <h2 >{{ $project->name }}</h2>
-            <p  class="icons-detail_content"> <img class="icon-detail"
-                src="{{ url('assets/img/pin.svg') }}" alt=""> {{ $project->location }}</p>
-            <ul class="items-details">
-              <li class="mb-3"> <img class="icon-detail " src="{{ url('assets/img/home.svg') }}" alt=""> Habitacional</li>
-              <li> <img class="icon-detail" src="{{ url('assets/img/rule.svg') }}" alt=""> {{ $project->square_meter }}</li>
-            </ul>
-            <p >{!! $project->description !!}</p>
+        @if($project->section === "group")
+        <div class="col-md-7">
+          <div class="slider slider-nav hero-content-group">
+            <div><img src="{{ $project->main_image }}" alt=""></div>
+            @foreach(DB::table("secondary_images")->where("project_id", $project->id)->get() as $image)
+            <div><img src="{{ $image->image }}" alt=""></div>
+            @endforeach
           </div>
         </div>
+        @endif
+        <div class="col-md-5">
+          @if($project->section === "project")
+          <div class="hero-content">
+            @else
+            <div style="margin-right: 7rem;">
+            @endif
+            <h2>{{ $project->name }}</h2>
+            <p class="icons-detail_content"> <img class="icon-detail" src="{{ url('assets/img/pin.svg') }}" alt=""> {{ $project->location }}</p>
+            <ul class="items-details">
+              <li class="mb-3"> <img class="icon-detail " src="{{ url('assets/img/home.svg') }}" alt=""> {{ $project->project_type }}</li>
+              <li> <img class="icon-detail" src="{{ url('assets/img/rule.svg') }}" alt=""> {{ $project->square_meter }}m<sup>2</sup></li>
+            </ul>
+            <p>{!! $project->description !!}</p>
+            @if($project->section === "project")
+          </div>
+          @endif
+        </div>
+        @if($project->section === "project")
         <div class="col-md-7">
           <div class="slider slider-nav">
             <div><img src="{{ $project->main_image }}" alt=""></div>
             @foreach(DB::table("secondary_images")->where("project_id", $project->id)->get() as $image)
             <div><img src="{{ $image->image }}" alt=""></div>
             @endforeach
-
-
           </div>
-
-
-
-
         </div>
+        @endif
       </div>
     </div>
   </section>
@@ -150,8 +171,70 @@
 
 
 
+  <!-- Modal contacto -->
+  <div class="modal fade contact-popup" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Contáctanos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="grid-contact">
+            <div>
 
+              <div class="form-group mcfg">
+                <input type="text" class="form-control m-input" name="name" id="name-message" placeholder="Nombre*" onfocus="this.placeholder = ''" onblur="this.placeholder ='Nombre*'">
+              </div>
+              <div class="form-group mcfg">
+                <input type="text" class="form-control m-input" name="email" id="email-message" placeholder="Correo electronico  *" onfocus="this.placeholder = ''" onblur="this.placeholder ='Correo electronico *'">
+              </div>
+              <div class="form-group mcfg">
+                <textarea rows="4" class="form-control m-input" name="msg" id="message-message" placeholder="Mensaje *" onfocus="this.placeholder =''" onblur="this.placeholder ='Mensaje *'"></textarea>
+              </div>
+              <button type="button" id="buttonSendMessage" class="m-submit btn-enviar" onclick="sendMessage()">enviar</button>
+              <div id="spinner" style="display:none">
+                Enviando...
+              </div>
+              <div class="col-md-12 text-center">
+                <div class="cf-msg"></div>
+              </div>
+
+            </div>
+
+            <div>
+
+              <div class="contact-details pl-5">
+
+                <div class="single-info">
+                  <h5>Dirección:</h5>
+                  <p>Cra. 4 # 13 –14 Piso 4 Ed. Davivienda</p>
+                  <p>Santa Marta</p>
+                </div>
+                <div class="single-info">
+                  <h5>Teléfono:</h5>
+                  <p> <a href="tel:(+57) 322 223 99 33" class="__cf_email__">(+57) 322 223 99 33</a> </p>
+
+                </div>
+                <div class="single-info">
+                  <h5>Email:</h5>
+                  <p><a href="mailto:contacto@celesteypiedra.com" class="__cf_email__"> contacto@celesteypiedra.com</a></p>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
   @include("partials.footer")
+  <a class="ws" target="_blank" href="https://api.whatsapp.com/send?phone=+573222239933&text=Hola!%20Quiero%20m%C3%A1s%20informaci%C3%B3n.%20C&P"> <img src="{{ url('assets/img/whatsapp.svg') }}" alt=""> </a>
+
   <script src="{{ url('assets/js/jquery-3.4.1.min.js') }}"></script>
 
   <script src="{{ url('assets/js/bootstrap.min.js') }}"></script>
@@ -180,7 +263,7 @@
   <script type="text/javascript" src="{{ url('assets/js/revslider.min.js') }}"></script>
   <script src="{{ url('assets/js/slick.min.js') }}"></script>
   <script>
-    $(window).scroll(function () {
+    $(window).scroll(function() {
       if ($(document).scrollTop() > 70 && $(window).width() >= 0) {
         $(".stick-area").addClass("stick");
         //  $("#iso").addClass('img-size').attr('src', 'assets/img/logo.png').removeClass('scroll-up');
@@ -199,20 +282,19 @@
       asNavFor: '.slider-nav'
     });
     $('.slider-nav').slick({
-      slidesToShow: 5,
+      slidesToShow: 3,
       slidesToScroll: 1,
       asNavFor: '.slider-for',
-    infinite:false,
+      infinite: false,
       arrows: false,
       focusOnSelect: true
     });
-
   </script>
-<script>
-      setTimeout(function () {
-            $('#pre-loader').fadeOut(300);
-        }, 1500)
-</script>
+  <script>
+    setTimeout(function() {
+      $('#pre-loader').fadeOut(300);
+    }, 1500)
+  </script>
 </body>
 
 </html>

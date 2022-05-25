@@ -33,14 +33,23 @@
     color: black!important;
 
 }
+.ic-lang{
+    filter: brightness(0.4);
+}
   </style>
+ <style>
 
+.dropdown-menu  {
+    background: #ffffff!important;
+    box-shadow: 0px 0px 10px #00000017;
+}
+</style>
 
 <section class="team bg-fixed container mt-10" >
 
     <div class="row">
       <div class="col-md-6">
-        <img src="{{ url('assets/img/team.png') }}" alt="">
+        <img class="img-ar"  src="{{ url('assets/img/team.png') }}" alt="">
       </div>
       <div class="col-md-6">
         <h3>ALEJANDRO ARIZMENDI</h3>
