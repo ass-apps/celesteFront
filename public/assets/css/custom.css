@@ -1834,6 +1834,12 @@ header.mextreo-header-area.nav-fixed button {
 }
 @media (max-width: 767px) {
 
+    .ic-lang{
+        filter: brightness(0.4);
+        margin-right: auto;
+        margin-left: auto;
+    }
+
     .menu-xs {
         position: absolute;
         width: 100%;
