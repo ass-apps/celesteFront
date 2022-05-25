@@ -1989,3 +1989,10 @@ header.mextreo-header-area.nav-fixed button {
   #google_translate_element img{
     display: initial;
   }
+
+  .skiptranslate iframe{
+      display:none;
+  }
+  body{
+      top: 0px !important;
+  }
