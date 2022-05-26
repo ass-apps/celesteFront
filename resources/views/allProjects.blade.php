@@ -132,6 +132,7 @@ function googleTranslateElementInit() {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
 
     <script src="assets/js/theme.js"></script>
+    <script type="text/javascript" src="{{ url('assets/js/lang.js') }}"></script>
 
     <!----- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
     <!-- REVOLUTION BANNER JS FILES  -->
