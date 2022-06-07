@@ -39,6 +39,7 @@ body {
 .footer {
     text-align: center;
     font-size: 0.8rem;
+    margin-top: 25px;
 }
 .footer a,
 .footer p {
@@ -234,7 +235,7 @@ header.mextreo-header-area {
     width: 100%;
     left: 0;
 
-    z-index: 9999;
+    z-index: 100;
 }
 header.mextreo-header-area .logo-wrapper {
     position: relative;
@@ -2038,4 +2039,7 @@ body {
         margin-top: 2rem;
         
       }
+}
+.lg-backdrop.in {
+    opacity: 0.9;
 }

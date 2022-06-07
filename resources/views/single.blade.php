@@ -111,9 +111,9 @@
       <a data-fancybox="gallery" href="{{ $project->main_image }}">
         <img src="{{ $project->main_image }}" alt="">
         <div class="mask"></div>
-        <div class="icon-expand">
+       <!-- <div class="icon-expand">
           <img class="" src="{{ url('assets/img/ecpand.svg') }}" alt="">
-        </div>
+        </div>-->
       </a>
 
 
@@ -339,7 +339,10 @@
 
   <script>
     lightGallery(document.getElementById('animated-thumbnails-gallery'), {
-      thumbnail: false,
+      thumbnail: true,
+      zoomFromOrigin: true,
+      download: false,
+      plugins: [lgZoom, lgThumbnail],
     });
   </script>
 
