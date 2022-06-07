@@ -49,6 +49,10 @@
   <link rel="stylesheet" type="text/css" href="{{ url('assets/css/revslider.css') }}" media="screen" />
   <link rel="stylesheet" href="{{ url('assets/css/custom-slider.css') }}">
   <link rel="stylesheet" href="{{ url('assets/css/custom.css') }}">
+
+  <!-- LightGallery-->
+  <link type="text/css" rel="stylesheet" href="{{ url('assets/css/lightgallery-bundle.min.css') }}" />
+
   <style>
     footer {
       position: relative;
@@ -71,12 +75,15 @@
     }
   </style>
   <script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'es',includedLanguages : 'es,en'}, 'google_translate_element');
-}
-</script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'es',
+        includedLanguages: 'es,en'
+      }, 'google_translate_element');
+    }
+  </script>
 
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </head>
 
@@ -109,16 +116,6 @@ function googleTranslateElementInit() {
         </div>
       </a>
 
-      @foreach(DB::table("secondary_images")->where("project_id", $project->id)->get() as $image)
-      <a data-fancybox="gallery" href="{{ $image->image  }}">
-        <img src="{{$image->image}}" alt="">
-        <div class="mask"></div>
-        <div class="icon-expand">
-          <img class="" src="{{ url('assets/img/ecpand.svg') }}" alt="">
-
-        </div>
-      </a>
-      @endforeach
 
     </div>
 
@@ -129,43 +126,79 @@ function googleTranslateElementInit() {
       <div class="row">
         @if($project->section === "group")
         <div class="col-md-7">
-          <div class="slider slider-nav hero-content-group">
+          <!--<div class="slider slider-nav hero-content-group">
             <div><img src="{{ $project->main_image }}" alt=""></div>
             @foreach(DB::table("secondary_images")->where("project_id", $project->id)->get() as $image)
             <div><img src="{{ $image->image }}" alt=""></div>
             @endforeach
-          </div>
+          </div>-->
+
+          <div id="animated-thumbnails-gallery" class="row row-gallery-left">
+              
+               
+              <a href="{{ $project->main_image }}" class="col-md-4 col-sm-6">
+                <img src="{{ $project->main_image }}" class='thumb-gallery' />
+              </a>
+           
+            @foreach(DB::table("secondary_images")->where("project_id", $project->id)->get() as $image)
+          
+              <a href="{{ $image->image }}" class="col-md-4 col-sm-6">
+                <img src="{{ $image->image }}" class='thumb-gallery' />
+              </a>
+           
+            @endforeach
+         
+        </div>
         </div>
         @endif
         <div class="col-md-5">
+
           @if($project->section === "project")
           <div class="hero-content">
             @else
-            <div style="margin-right: 7rem;">
+            <div class="hero-content-right">
+              @endif
+              <h2>{{ $project->name }}</h2>
+              <p class="icons-detail_content"> <img class="icon-detail" src="{{ url('assets/img/pin.svg') }}" alt=""> {{ $project->location }}</p>
+              <ul class="items-details">
+                <li class="mb-3"> <img class="icon-detail " src="{{ url('assets/img/home.svg') }}" alt=""> {{ $project->project_type }}</li>
+                <li> <img class="icon-detail" src="{{ url('assets/img/rule.svg') }}" alt=""> {{ $project->square_meter }}m<sup>2</sup></li>
+              </ul>
+              <p>{!! $project->description !!}</p>
+              @if($project->section === "project")
+            </div>
             @endif
-            <h2>{{ $project->name }}</h2>
-            <p class="icons-detail_content"> <img class="icon-detail" src="{{ url('assets/img/pin.svg') }}" alt=""> {{ $project->location }}</p>
-            <ul class="items-details">
-              <li class="mb-3"> <img class="icon-detail " src="{{ url('assets/img/home.svg') }}" alt=""> {{ $project->project_type }}</li>
-              <li> <img class="icon-detail" src="{{ url('assets/img/rule.svg') }}" alt=""> {{ $project->square_meter }}m<sup>2</sup></li>
-            </ul>
-            <p>{!! $project->description !!}</p>
-            @if($project->section === "project")
+          </div>
+          @if($project->section === "project")
+          <div class="col-md-7">
+            <!-- <div class="slider slider-nav ">
+              <div><img src="{{ $project->main_image }}" alt=""></div>
+              @foreach(DB::table("secondary_images")->where("project_id", $project->id)->get() as $image)
+              <div><img src="{{ $image->image }}" alt=""></div>
+              @endforeach
+            </div> !-->
+
+            <div id="animated-thumbnails-gallery" class="row row-gallery">
+              
+               
+                  <a href="{{ $project->main_image }}" class="col-md-4 col-sm-6">
+                    <img src="{{ $project->main_image }}" class='thumb-gallery' />
+                  </a>
+               
+                @foreach(DB::table("secondary_images")->where("project_id", $project->id)->get() as $image)
+              
+                  <a href="{{ $image->image }}" class="col-md-4 col-sm-6">
+                    <img src="{{ $image->image }}" class='thumb-gallery' />
+                  </a>
+               
+                @endforeach
+             
+            </div>
+
           </div>
           @endif
         </div>
-        @if($project->section === "project")
-        <div class="col-md-7">
-          <div class="slider slider-nav">
-            <div><img src="{{ $project->main_image }}" alt=""></div>
-            @foreach(DB::table("secondary_images")->where("project_id", $project->id)->get() as $image)
-            <div><img src="{{ $image->image }}" alt=""></div>
-            @endforeach
-          </div>
-        </div>
-        @endif
       </div>
-    </div>
   </section>
 
 
@@ -296,6 +329,20 @@ function googleTranslateElementInit() {
       $('#pre-loader').fadeOut(300);
     }, 1500)
   </script>
+
+  <script src="{{ url('assets/js/lightgallery.umd.js') }}"></script>
+  <!-- Or use the minified version -->
+
+  <!-- lightgallery plugins -->
+  <script src="{{ url('assets/js/lg-thumbnail.umd.js') }}"></script>
+  <script src="{{ url('assets/js/lg-zoom.umd.js') }}"></script>
+
+  <script>
+    lightGallery(document.getElementById('animated-thumbnails-gallery'), {
+      thumbnail: false,
+    });
+  </script>
+
 </body>
 
 </html>

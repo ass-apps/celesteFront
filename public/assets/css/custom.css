@@ -1483,6 +1483,10 @@ section.mextreo-hero.inner .contact-details .single-info h5 {
 .hero-content {
     margin-left: 7rem;
 }
+.hero-content-right {
+   
+    margin-right: 7rem;
+}
 .hero-content-group {
     margin-left: 20rem;
 }
@@ -1997,4 +2001,41 @@ body {
     .container {
         max-width: 1200px !important;
     }
+}
+
+.thumb-gallery{
+    display: block;
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    object-position: revert;
+    margin-top: 15px;
+  }
+  .row-gallery{
+    margin-right: 7rem;
+  }
+  .row-gallery-left{
+     margin-left: 7rem;
+  }
+
+  @media (max-width: 1200px) {
+    .row-gallery,   .row-gallery-left, .hero-content-right, .hero-content{
+        margin-right: 1rem;
+        margin-left: 1rem;
+      }
+      .row-gallery-left{
+         margin-left: 1rem;
+         margin-right: 1rem;
+      }
+
+     
+}
+
+@media (max-width: 760px) {
+   
+
+      .hero-content-right {
+        margin-top: 2rem;
+        
+      }
 }
